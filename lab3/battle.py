@@ -44,7 +44,11 @@ class Board:
         for row in range(self.size):
             for col in range(self.size):
                 if (visited[row][col] == False and self.grid[row][col] == "K"):
-                    ship_count[dfs(row, col, 1)-1] += 1
+                    res = dfs(row, col, 1)
+                    if (res > 4):
+                        return False
+                    else:
+                        ship_count[res-1] += 1
 
         return (ship_count == self.ship_constraints)
 
