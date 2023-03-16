@@ -158,6 +158,8 @@ class Board:
                 elif (self.grid[i][j] == "0"):
                     avail_count += 1
                     longest_ship = 0
+                elif (self.grid[i][j] == "."):
+                    longest_ship = 0
                 
             # check for constraints, and fill water/K
             if (self.row_constraints[i] < K_count):
@@ -206,6 +208,8 @@ class Board:
                         return -1
                 elif (self.grid[i][j] == "0"):
                     avail_count += 1
+                    longest_ship = 0
+                elif (self.grid[i][j] == "."):
                     longest_ship = 0
                 
             # check for constraints, and fill water/K
@@ -375,7 +379,10 @@ class Board:
                     return new_grid
             else:
                 self.grid[temp[0]][temp[1]] = "."
-                continue
+                if (self.forward() == True):
+                    continue
+                else:
+                    return None
 
         # if nothing in "empty" satisfies, then go back
         return None
